@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +56,7 @@ namespace ImageGallery.Services
         public async Task AddMetadataAsync(Image image, Face[] faces)
         {
             var imageUri = image.ImagePath;
+
             // Associate the image URI with the metadata
             var fileName = String.Concat(metaDataPrefix, image.ImageGuid, ".json");
             var metadataBlob = _container.GetBlockBlobReference(fileName);
@@ -72,7 +72,6 @@ namespace ImageGallery.Services
         {
             var imageList = new List<Image>();
             var blobList = _container.ListBlobs(imagePrefix);
-            var metadataList = _container.ListBlobs(metaDataPrefix);
 
             foreach (var blob in blobList)
             {
